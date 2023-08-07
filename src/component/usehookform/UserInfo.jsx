@@ -20,6 +20,9 @@ const UserInfoComponent = () => {
             required:{
               value:true,
               message:'Please fill your name'
+            },
+            validate:(value)=>{
+              return value !== 'admin' || 'Please provide another name'
             }
           })} />
           <p className="error">{errors.name?.message}</p>
@@ -34,6 +37,17 @@ const UserInfoComponent = () => {
             pattern: {
               value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               message: 'Invalid email address'
+            },
+            validate:{
+              notAdminEmail:(value)=>{
+                return value !== 'admin@gmail.com' || 'Please choose another email'
+              },
+              blockDomail:(value)=>{
+                return !value.endsWith('test.com')  || 'This domin is not allowed'
+              },
+              lengthError:(value)=>{
+                return value.length > 6 || 'Please write correct email format'
+              }
             }
           })} />
           <p className="error">{errors.email?.message}</p>
