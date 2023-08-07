@@ -9,7 +9,7 @@ function App() {
 
   return (
      <>
-      <h1>React hook form</h1>
+      <h1>React hook form Validation</h1>
       {/* <UserComponent /> */}
       <UserInfoComponent />
      </>
