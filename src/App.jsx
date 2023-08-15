@@ -7,11 +7,17 @@ import UserInfoComponent from './component/usehookform/UserInfo'
 
 function App() {
 
+  const userData = {
+    name:'Vishal',
+    email:'vishal@gmail.com',
+    phone:8381895574
+  }
+
   return (
      <>
       <h1>React hook form Validation</h1>
       {/* <UserComponent /> */}
-      <UserInfoComponent />
+      <UserInfoComponent userData={userData} />
      </>
   )
 }

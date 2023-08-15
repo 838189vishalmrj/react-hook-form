@@ -1,8 +1,19 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
-const UserInfoComponent = () => {
-  const form = useForm();
+const UserInfoComponent = ({userData}) => {
+  const form = useForm({
+    defaultValues:async ()=>{
+      const response = await fetch('https://dummyjson.com/users/1')
+      const data = await response.json()
+      console.log(data);
+      return {
+        name:data.firstName,
+        email:data.email,
+        phone:data.phone
+      }
+    }
+  });
   const { register, control, handleSubmit,formState:{errors}} = form;
 
   // console.log(form);
@@ -54,7 +65,7 @@ const UserInfoComponent = () => {
         </div>
         <div className="formContainer">
           <label htmlFor="phone">Phone</label>
-          <input type="number" id="phone" {...register("phone",{
+          <input type="string" id="phone" {...register("phone",{
             required:{
               value:true,
               message:"Please fill your phone number"
