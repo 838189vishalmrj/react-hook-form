@@ -1,23 +1,18 @@
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
-const UserInfoComponent = ({userData}) => {
+const UserInfoComponent = () => {
   const form = useForm({
-    defaultValues:async ()=>{
-      const response = await fetch('https://dummyjson.com/users/1')
-      const data = await response.json()
-      console.log(data);
-      return {
-        name:data.firstName,
-        email:data.email,
-        phone:data.phone,
+    defaultValues:{
+        name:"",
+        email:"",
+        phone:['',''],
         address:{
-          city:data.address.city,
-          pincode:data.address.postalCode
+          city:"",
+          pincode:""
         }
       }
-    }
-  });
+    });
   const { register, control, handleSubmit,formState:{errors}} = form;
 
   // console.log(form);
@@ -69,13 +64,18 @@ const UserInfoComponent = ({userData}) => {
         </div>
         <div className="formContainer">
           <label htmlFor="phone">Phone</label>
-          <input type="string" id="phone" {...register("phone",{
+          <input type="string" id="phone" {...register("phone.0",{
             required:{
               value:true,
               message:"Please fill your phone number"
             }
           })} />
           <p className="error">{errors.phone?.message}</p>
+        </div>
+        <div className="formContainer">
+          <label htmlFor="secondphone">Second Phone</label>
+          <input type="text" id="secondphone" {...register("phone.1")} placeholder="Enter your seond number"/>
+          <p className="error">{errors.secondphone?.message}</p>
         </div>
         <div className="formContainer">
           <label htmlFor="city">City</label>
