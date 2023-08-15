@@ -10,7 +10,11 @@ const UserInfoComponent = ({userData}) => {
       return {
         name:data.firstName,
         email:data.email,
-        phone:data.phone
+        phone:data.phone,
+        address:{
+          city:data.address.city,
+          pincode:data.address.postalCode
+        }
       }
     }
   });
@@ -72,6 +76,14 @@ const UserInfoComponent = ({userData}) => {
             }
           })} />
           <p className="error">{errors.phone?.message}</p>
+        </div>
+        <div className="formContainer">
+          <label htmlFor="city">City</label>
+          <input type="text" id="city" {...register('address.city')} placeholder="Enter your city" />
+        </div>
+        <div className="formContainer">
+          <label htmlFor="pincode">Pincode</label>
+          <input type="text" id="pincode" {...register('address.pincode')} placeholder="Enter your city" />
         </div>
         <div className="formContainer">
           <input type="submit" value={"Submit"} />
